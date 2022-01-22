@@ -8,6 +8,7 @@ import { copy_assets, get_aliases } from '../utils.js';
 import { create_build, find_deps } from './utils.js';
 import { SVELTE_KIT } from '../constants.js';
 import { posixify } from '../../utils/filesystem.js';
+import { createHash } from 'crypto';
 
 /**
  * @param {{
@@ -108,6 +109,10 @@ export async function build_client({
 	return {
 		assets,
 		chunks,
+		hashes: chunks.reduce((/** @type {Object.<string, string>} */ obj, item) => {
+			obj[item.fileName] = createHash('sha256').update(item.code).digest('base64');
+			return obj;
+		}, {}),
 		entry: {
 			file: vite_manifest[entry].file,
 			js: Array.from(entry_js),

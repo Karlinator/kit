@@ -51,6 +51,7 @@ export function generate_manifest(
 	return `{
 		appDir: ${s(build_data.app_dir)},
 		assets: new Set(${s(build_data.manifest_data.assets.map(asset => asset.file))}),
+		hashes: ${s(build_data.client.hashes)},
 		_: {
 			mime: ${s(get_mime_lookup(build_data.manifest_data))},
 			entry: ${s(build_data.client.entry)},

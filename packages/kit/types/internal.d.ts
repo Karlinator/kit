@@ -193,6 +193,7 @@ export interface BuildData {
 	client: {
 		assets: OutputAsset[];
 		chunks: OutputChunk[];
+		hashes: { [fileName: string]: string };
 		entry: {
 			file: string;
 			js: string[];

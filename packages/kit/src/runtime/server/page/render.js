@@ -159,7 +159,12 @@ export async function render_response({
 
 		if (page_config.router || page_config.hydrate) {
 			head += Array.from(js)
-				.map((dep) => `\n\t<link rel="modulepreload" href="${options.prefix + dep}">`)
+				.map(
+					(dep) =>
+						`\n\t<link rel="modulepreload" href="${options.prefix + dep}" integrity="sha256-${
+							options.manifest.hashes?.[dep]
+						}">`
+				)
 				.join('');
 			// prettier-ignore
 			head += `

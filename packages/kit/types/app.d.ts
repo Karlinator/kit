@@ -17,6 +17,7 @@ export class InternalApp extends App {
 export interface SSRManifest {
 	appDir: string;
 	assets: Set<string>;
+	hashes?: { [fileName: string]: string };
 	/** private fields */
 	_: {
 		mime: Record<string, string>;
